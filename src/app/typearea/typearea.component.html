@@ -1,0 +1,19 @@
+
+<div class="container" #typing> 
+    <div class="chrono d-flex justify-content-center align-items-center position-relative mt-5">
+        <div *ngIf="loading" [ngClass]="{'rounded-circle': true, 'bg-danger': firstState, 'bg-warning': secondState, 'bg-success': thirdState, 'text-white': true, }">{{showChrono.toString()}}</div>
+        <div *ngIf="loading" [ngClass]="{'rounded-circle': true, second: true, 'bg-danger': firstState, 'bg-warning': secondState, 'bg-success': thirdState, 'text-white': true }">{{showChrono.toString()}}</div>
+        <div *ngIf="start" class="display-3">Go !</div>
+    </div>
+   <div class="type-text row justify-content-center">
+        <div class="col col-9">
+            <span *ngFor="let word of textWords" class="word fs-3">
+                <span *ngFor="let character of splitWord(word)" class="character mx-1">{{character}}</span>
+            </span>
+            <div class="mt-3">
+                <a routerLink="/welcome" class="btn btn-primary py-2 px-3 rounded-pill"><span class="fas fa-arrow-left"></span> Revenir à l'accueil</a>
+            </div>
+            <div id="id"></div>
+        </div>
+    </div>
+</div>
