@@ -1,19 +1,45 @@
 
-<div class="container" #typing> 
-    <div class="chrono d-flex justify-content-center align-items-center position-relative mt-5">
+<div class="container position-relative montserrat"> 
+    <div class="chrono d-flex justify-content-center align-items-center">
         <div *ngIf="loading" [ngClass]="{'rounded-circle': true, 'bg-danger': firstState, 'bg-warning': secondState, 'bg-success': thirdState, 'text-white': true, }">{{showChrono.toString()}}</div>
         <div *ngIf="loading" [ngClass]="{'rounded-circle': true, second: true, 'bg-danger': firstState, 'bg-warning': secondState, 'bg-success': thirdState, 'text-white': true }">{{showChrono.toString()}}</div>
         <div *ngIf="start" class="display-3">Go !</div>
     </div>
    <div class="type-text row justify-content-center">
         <div class="col col-9">
-            <span *ngFor="let word of textWords" class="word fs-3">
-                <span *ngFor="let character of splitWord(word)" class="character mx-1">{{character}}</span>
-            </span>
-            <div class="mt-3">
+            <div class="sentence">
+                <ng-container *ngFor="let word of textWordsArray">
+                    <span class="word fs-3">
+                        <span *ngFor="let character of splitWord(word)" class="character">{{character}}</span>
+                    </span>
+                
+                    <span class="character space fs-3">{{space}}</span>
+                
+                </ng-container>
+            </div>
+            <div id="results" class="d-flex justify-content-center align-items-center flex-wrap flex-column mt-5" *ngIf="results">
+                <div class="result-title d-flex justify-content-center w-100 gap-4 text-center fs-3">
+                    <div>
+                        <p class="result px-4 py-1 rounded-pill bg-primary text-white fw-semibold">Vitesse</p>
+                        <p class="result">{{speed}} WPW</p>
+                    </div>
+                    <div>
+                        <p class="result px-4 py-1 rounded-pill bg-primary text-white fw-semibold">Erreurs</p>
+                        <p class="result">{{errors}}</p>
+                    </div>
+                    <div>
+                        <p class="result px-4 py-1 rounded-pill bg-primary text-white fw-semibold">Précision</p>
+                        <p class="result">{{precision}}%</p>
+                    </div>
+                    <div>
+                        <p class="result px-4 py-1 rounded-pill bg-primary text-white fw-semibold">Durée</p>
+                        <p class="result">{{duration}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
                 <a routerLink="/welcome" class="btn btn-primary py-2 px-3 rounded-pill"><span class="fas fa-arrow-left"></span> Revenir à l'accueil</a>
             </div>
-            <div id="id"></div>
         </div>
     </div>
 </div>
