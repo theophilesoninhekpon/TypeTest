@@ -3,10 +3,13 @@
     <div class="chrono d-flex justify-content-center align-items-center">
         <div *ngIf="loading" [ngClass]="{'rounded-circle': true, 'bg-danger': firstState, 'bg-warning': secondState, 'bg-success': thirdState, 'text-white': true, }">{{showChrono.toString()}}</div>
         <div *ngIf="loading" [ngClass]="{'rounded-circle': true, second: true, 'bg-danger': firstState, 'bg-warning': secondState, 'bg-success': thirdState, 'text-white': true }">{{showChrono.toString()}}</div>
-        <div *ngIf="start" class="display-3">Go !</div>
+        <div *ngIf="start" class="display-3 text-center">Go !</div>
+        <div> <span class="jet fs-2 text-primary fas fa-fighter-jet" [style.transform]="'translateX(' +jetStep+ 'px)'"></span></div>
+        <div [style.transform]="'translateX(' +jetStep+ 'px)'"> </div>
+        <div *ngIf="results"> <a href="/test" ><span class="fs-1 text-primary fas fa-redo-alt"></span></a></div>
     </div>
    <div class="type-text row justify-content-center">
-        <div class="col col-9">
+        <div class="area col col-9">
             <div class="sentence">
                 <ng-container *ngFor="let word of textWordsArray">
                     <span class="word fs-3">

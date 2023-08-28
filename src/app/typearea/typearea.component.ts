@@ -27,6 +27,10 @@ export class TypeareaComponent implements OnInit{
   testCharacters!: NodeList;
   results: boolean = false;
   space: string = " ";
+  jetStep: number = 0;
+  area!: HTMLElement | null; 
+  width!: number | undefined;
+  
   /**
    * 
    * @param word le mot à convertir en tableau de caractères
@@ -84,7 +88,21 @@ export class TypeareaComponent implements OnInit{
           let firstElement = this.testCharacters[0];
 
           document.querySelector(".sentence")?.removeChild(this.testCharacters[this.testCharacters.length - 1]);
-     
+          
+          this.area = document.querySelector(".area");
+
+          let jet: HTMLElement | null = document.querySelector(".jet");
+
+          if(jet !== null && this.area !== null){
+            
+            this.width  = this.area.offsetWidth - (jet.offsetWidth * 2);
+
+          }
+
+          if(this.width !== undefined){
+            this.jetStep = -1 * (this.width / 2);
+          }
+          
           this.highlight(firstElement);
 
       }
@@ -132,13 +150,12 @@ export class TypeareaComponent implements OnInit{
       
       let currentElement: Element;
       userCharacter = event.key;
-      console.log(event)
       currentWord = this.textWordsArray[wordCount];
       currentElement = this.testCharacters[characterCount] as HTMLElement;
       currentCharacter = currentElement.innerHTML;
       numberOfKeyStrokes++;
       let durationInterval;
-
+      
       if(numberOfKeyStrokes === 1){
 
         durationInterval = setInterval(()=>{
@@ -150,7 +167,17 @@ export class TypeareaComponent implements OnInit{
       // quand le caractère que l'utilisateur saisi correspond au caractère actuel dans le test
       if(userCharacter === currentCharacter){
 
+      
         numberOfGoodKeystrokes++;
+
+        if(this.width !== undefined){
+
+          let jetStart = -1 * (this.width / 2);
+          let step = this.width / this.testCharacters.length;
+          this.jetStep += step;
+
+
+        }
 
         if(isBlocked){
           this.unblockElement(currentElement);
@@ -194,7 +221,7 @@ export class TypeareaComponent implements OnInit{
 
         console.log(event.shiftKey)
           if(!event.shiftKey && event.key !== 'CapsLock') {
-            console.log("Pas Caps Lock")
+
             isBlocked = true;
             numberOfBadKeystrokes++;
             this.removeHighlight(currentElement);
@@ -210,7 +237,7 @@ export class TypeareaComponent implements OnInit{
 
   ngOnInit(): void {
 
-   
+  
     // Démarre le chrono
     this.startChrono();
    
