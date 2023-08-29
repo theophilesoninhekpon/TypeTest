@@ -30,6 +30,7 @@ export class TypeareaComponent implements OnInit{
   jetStep: number = 0;
   area!: HTMLElement | null; 
   width!: number | undefined;
+  jetStart!: boolean;
   
   /**
    * 
@@ -81,6 +82,22 @@ export class TypeareaComponent implements OnInit{
 
           setTimeout(()=>{
             this.start = false;
+            this.jetStart = true;
+
+            setTimeout(()=>{
+              let jet: HTMLElement | null = document.querySelector(".jet");
+              console.log(jet)
+
+              if(jet !== null && this.area !== null && this.width !== undefined){
+                
+                console.log("ici");
+                this.width  = this.area.offsetWidth;
+
+                this.jetStep = -1 * (this.width / 2) + jet?.offsetWidth;
+
+          }
+            }, 500)
+
           }, 2000)
           
           this.testCharacters= document.querySelectorAll<HTMLSpanElement>(".character");
@@ -91,18 +108,7 @@ export class TypeareaComponent implements OnInit{
           
           this.area = document.querySelector(".area");
 
-          let jet: HTMLElement | null = document.querySelector(".jet");
 
-          if(jet !== null && this.area !== null){
-            
-            this.width  = this.area.offsetWidth - (jet.offsetWidth * 2);
-
-          }
-
-          if(this.width !== undefined){
-            this.jetStep = -1 * (this.width / 2);
-          }
-          
           this.highlight(firstElement);
 
       }
@@ -113,7 +119,6 @@ export class TypeareaComponent implements OnInit{
   // Faire surbriller l'élément
   highlight(element : Node ){
     let convertedElement = element as HTMLElement;
-    console.log(convertedElement);
     convertedElement.classList.add('current');
   }
 
