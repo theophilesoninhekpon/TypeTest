@@ -1,0 +1,19 @@
+.wrapper {
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(123, 0, 255, 0.531);
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../assets/background.jpg);
+    background-repeat-y: no-repeat;
+    z-index: -1;
+}

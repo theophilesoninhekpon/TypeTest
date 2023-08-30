@@ -83,19 +83,19 @@ export class TypeareaComponent implements OnInit{
           setTimeout(()=>{
             this.start = false;
             this.jetStart = true;
-
+            this.area = document.querySelector(".area");
+            
             setTimeout(()=>{
+              
               let jet: HTMLElement | null = document.querySelector(".jet");
-              console.log(jet)
-
-              if(jet !== null && this.area !== null && this.width !== undefined){
-                
-                console.log("ici");
+            
+              if(jet !== null && this.area !== null){
+      
                 this.width  = this.area.offsetWidth;
+                this.jetStep = (-1 * (this.width / 2)) + jet.offsetWidth;
 
-                this.jetStep = -1 * (this.width / 2) + jet?.offsetWidth;
+              }
 
-          }
             }, 500)
 
           }, 2000)
@@ -105,9 +105,6 @@ export class TypeareaComponent implements OnInit{
           let firstElement = this.testCharacters[0];
 
           document.querySelector(".sentence")?.removeChild(this.testCharacters[this.testCharacters.length - 1]);
-          
-          this.area = document.querySelector(".area");
-
 
           this.highlight(firstElement);
 
